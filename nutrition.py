@@ -35,12 +35,14 @@ def main():
     print("\n- Nutrition Tracker -")
 
     while True:
-        display_main_menu(ppl)
+        
+        display_ppl(ppl)
+        main_menu(ppl)
         
 
+def display_ppl(ppl):
 
 
-def display_main_menu(ppl):
     print('-' * 40)
 
     if len(ppl) == 0:
@@ -48,15 +50,26 @@ def display_main_menu(ppl):
         register_person(ppl)
         return
 
-    print("|    People regestered in system")
+    print("|    People regestered in system       |")
+    print('-' * 40)
 
     i = 1
     for name in ppl:
-        print("|    {} : {}".format(i, name))
+        print("|    {} : {}                       |".format(i, name))
         i+= 1
     
+    print('-' * 40)
+
+
+    pass
+
+
+
+
+def main_menu(ppl):
+
     # user options = select person || exit
-    print('Options...\nAdd Person (1)\nGoto Person (2)\nClear Person info(3)\nClear all data(4)\nExit (5)')
+    print('Options...\nAdd Person (1)\nGoto Person (2)\nClear Person info (3)\nClear all data (4)\nExit (5)')
     option = int(input("ENTER: "))
     while int(option) < 1 or int(option) > 5:
         print("Please enter an option between 1 and 5")
@@ -68,14 +81,13 @@ def display_main_menu(ppl):
     elif option == 2:
         #this is the afforementioned sub menu
         person_menu(ppl)
-        pass
-
+       
     elif option == 3:
         #clear person info
         pass
 
     elif option == 4:
-        wipe_all_data()
+        wipe_all_data(ppl)
 
     elif option == 5:
         sys.exit()
@@ -92,12 +104,6 @@ def person_menu(ppl):
 
     # get data
     
-
-
-
-                
-        
-
 
         
 def register_person(ppl):
@@ -128,12 +134,14 @@ def register_person(ppl):
     
 
 
-def wipe_all_data():
+def wipe_all_data(ppl):
     out_file = open('data.txt', 'w')
     out_file.close
     print('\nData cleared')
+    ppl.clear()
+    display_ppl(ppl)
 
-    
+
 def get_names():
     out_file = open('data.txt', 'r')
     names = []

@@ -1,24 +1,16 @@
+name = Thomas
+calories = 1
+protein = 1
+carbs = 1
+fat = 1
+sugar = 1
+satfat = 1
+
 name = Anthony
-calories = 3204
+calories = 3024
 protein = 195
 carbs = 427
 fat = 91
 sugar = 85
 satfat = 36
-
-name = Erick
-calories = 2
-protein = 2
-carbs = 2
-fat = 2
-sugar = 2
-satfat = 2
-
-name = Thomas
-calories = 3
-protein = 3
-carbs = 3
-fat = 3
-sugar = 3
-satfat = 3
 
