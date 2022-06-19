@@ -1,0 +1,16 @@
+name = Anthony
+calories = 1
+protein = 1
+carbs = 1
+fat = 1
+sugar = 1
+satfat = 1
+
+name = Erick
+calories = 2
+protein = 2
+carbs = 2
+fat = 2
+sugar = 2
+satfat = 2
+
