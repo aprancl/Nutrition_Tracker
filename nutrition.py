@@ -48,6 +48,7 @@ def display_ppl(ppl):
     if len(ppl) == 0:
         print("<There are no people registered in the system>")
         register_person(ppl)
+        display_ppl(ppl)
         return
 
     print("|    People regestered in system       |")
@@ -55,7 +56,7 @@ def display_ppl(ppl):
 
     i = 1
     for name in ppl:
-        print("|    {} : {}                       |".format(i, name))
+        print("|    {0} : {1:<30s}|".format(i, name))
         i+= 1
     
     print('-' * 40)

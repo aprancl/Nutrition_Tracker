@@ -1,11 +1,3 @@
-name = Thomas
-calories = 1
-protein = 1
-carbs = 1
-fat = 1
-sugar = 1
-satfat = 1
-
 name = Anthony
 calories = 3024
 protein = 195
@@ -13,4 +5,36 @@ carbs = 427
 fat = 91
 sugar = 85
 satfat = 36
+
+name = Erick
+calories = 1
+protein = 1
+carbs = 1
+fat = 1
+sugar = 1
+satfat = 1
+
+name = Thomas
+calories = 2
+protein = 2
+carbs = 2
+fat = 2
+sugar = 2
+satfat = 2
+
+name = Hippocrates
+calories = 7
+protein = 7
+carbs = 7
+fat = 7
+sugar = 7
+satfat = 7
+
+name = Darth Vader
+calories = 0
+protein = 0
+carbs = 0
+fat = 0
+sugar = 0
+satfat = 0
 
