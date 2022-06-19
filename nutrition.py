@@ -67,6 +67,7 @@ def display_main_menu(ppl):
 
     elif option == 2:
         #this is the afforementioned sub menu
+        person_menu(ppl)
         pass
 
     elif option == 3:
@@ -78,6 +79,24 @@ def display_main_menu(ppl):
 
     elif option == 5:
         sys.exit()
+
+
+
+def person_menu(ppl):
+    #get person name
+    idx = int(input("Enter the your person's index: "))
+    person = ppl[idx - 1]
+    person_data = get_data(person)
+
+    print(person_data)
+
+    # get data
+    
+
+
+
+                
+        
 
 
         
@@ -106,7 +125,6 @@ def register_person(ppl):
     out_file.write('satfat = ' + str(lim_satfat) + '\n\n')
     out_file.close()
 
-
     
 
 
@@ -134,6 +152,23 @@ def get_names():
     out_file.close()
     return names
     
+def get_data(person):
+
+    data = []
+
+    out_file = open('data.txt', 'r')
+    lines = out_file.readlines()
+
+    for i in range(len(lines)):
+        line = lines[i].split()
+
+        if len(line) > 0 and line[2].rstrip('\n') == person:
+            i += 1
+            for j in range(6):
+                data.append(lines[i].split()[2])
+            return data
+    
+   
 
 
 
