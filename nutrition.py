@@ -174,6 +174,7 @@ def get_data(person):
             i += 1
             for j in range(6):
                 data.append(lines[i].split()[2])
+                i += 1
             return data
     
    
