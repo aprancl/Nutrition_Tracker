@@ -100,8 +100,19 @@ def person_menu(ppl):
     idx = int(input("Enter the your person's index: "))
     person = ppl[idx - 1]
     person_data = get_data(person)
+    nut_categories = ["Calories", "Protein", "Carbohydrates", "Fat", "Sugar Limit", "Saturated Fat Limit"]
+
+    print("-" * 40)
+    print("|            Macronutrients            |")
+    print("-" * 40)
+
+        
+    for i in range(len(person_data)): 
+        print("|    {0}: {1:<30s} |".format(nut_categories[i], person_data[i]))
+
 
     print(person_data)
+
 
     # get data
     
