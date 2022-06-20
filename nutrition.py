@@ -112,6 +112,25 @@ def person_menu(ppl):
     print("-" * 40, end='\n\n')
 
     # display some more options
+
+    while True:    
+
+        print("More options...\nSee current day (1)\nReset day (2)\nBack (4)")
+
+        option = int(input("ENTER: "))
+        while int(option) < 1 or int(option) > 4:
+            print("Please enter an option between 1 and 5")
+            option = input("ENTER: ")
+
+        if option == 1:
+            #cur_dat_menu(person)
+            pass
+        elif option == 2:
+            #reset_day(person)
+            pass
+        elif option == 3:
+            return
+
     
 
         
