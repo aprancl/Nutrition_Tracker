@@ -3,6 +3,8 @@ import pdb
 import sys
 import os
 
+from regex import W
+
 
 # program that tracks daily nutrition and eventually weight and such
 
@@ -125,7 +127,7 @@ def person_menu(ppl):
 
     print('-' * 40)
     for i in range(len(person_data_day)):
-        print("|    {0:<19} : {1:^12s}| ---{2:.2f}%".format(nut_categories[i], person_data_day[i] + '/' + person_data[i], float(person_data_day[i]) / float(person_data[i])))
+        print("|    {0:<19} : {1:^12s}| ---{2:.2f}%".format(nut_categories[i], person_data_day[i] + '/' + person_data[i], (float(person_data_day[i]) / float(person_data[i]))* 100))
     print('-' * 40)
     
     # display some more options
@@ -149,7 +151,7 @@ def person_menu(ppl):
 
             print('-' * 40)
             for i in range(len(person_data_day)):
-                print("|    {0:<19} : {1:^12s}| ---{2:.2f}%".format(nut_categories[i], person_data_day[i] + '/' + person_data[i], float(person_data_day[i]) / float(person_data[i])))
+                print("|    {0:<19} : {1:^12s}| ---{2:.2f}%".format(nut_categories[i], person_data_day[i] + '/' + person_data[i], (float(person_data_day[i]) / float(person_data[i]))* 100))
             print('-' * 40)
 
 
@@ -216,12 +218,12 @@ def add_meal(person):
     # gather data from user 
     print('---Enter the nutritional value of your meal---')
     print("\namout of...")
-    calories = int(input("Calories: "))
-    protein = int(input("Protein: "))
-    carbs = int(input("Carbs: "))
-    fat = int(input("Fat: "))
-    sugar = int(input("Sugar: "))
-    satfat = int(input("Saturated Fat: "))
+    calories = input("Calories: ")
+    protein = input("Protein: ")
+    carbs = input("Carbs: ")
+    fat = input("Fat: ")
+    sugar = input("Sugar: ")
+    satfat = input("Saturated Fat: ")
 
     data = [calories, protein, carbs, fat, sugar, satfat]
 
@@ -295,8 +297,11 @@ def get_data_day(person):
 
 def set_data_day(person, data):
 
+
+    # read from file
     out_file = open('data.txt', 'r')
     lines = out_file.readlines()
+    out_file.close()
 
     for i in range(len(lines)):
         line = lines[i].split()
@@ -304,12 +309,18 @@ def set_data_day(person, data):
         if len(line) > 0 and line[2].rstrip('\n') == person:
             i += 7
             for j in range(6):
-                line[2] = data[j]
+                line = lines[i].split()
+                line[2] = str(int(line[2]) + int(data[j])) + '\n'
+                lines[i] = " ".join(line)
+
                 i += 1
             break
-
+    
+    # write to file
+    out_file = open('data.txt','w')
+    out_file.write("".join(lines))
     out_file.close()
-   
+
 
 
 
