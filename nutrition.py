@@ -360,8 +360,8 @@ def get_last_save():
 
     for line in lines:
 
-        if len(line) == 1:
-            return line[0]
+        if len(line.split()) == 1 and line != "\n":
+            return "".join(line)
     return 'garbage'
 
 
