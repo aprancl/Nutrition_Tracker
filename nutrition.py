@@ -3,7 +3,6 @@ import pdb
 import sys
 import os
 
-from regex import W
 
 
 # program that tracks daily nutrition and eventually weight and such
@@ -32,7 +31,15 @@ Saturated Fat < 12
 
 def main():
 
+
     ppl = get_names()
+
+    # reset daily progress if we are on a new day
+    if get_last_save() != datetime.datetime.now().strftime("%A") and len(ppl) > 0:
+
+        for name in ppl:
+            clear_daily_progress(name)
+
 
     print("\n- Nutrition Tracker -")
 
@@ -40,6 +47,7 @@ def main():
         
         display_ppl(ppl)
         main_menu(ppl)
+
         
 
 def display_ppl(ppl):
@@ -62,11 +70,6 @@ def display_ppl(ppl):
         i+= 1
     
     print('-' * 40)
-
-
-    pass
-
-
 
 
 def main_menu(ppl):
@@ -93,6 +96,9 @@ def main_menu(ppl):
         wipe_all_data(ppl)
 
     elif option == 5:
+        # automate the clearing of data when new day comes around
+        out_file = open('data.txt', 'a')
+        out_file.write(datetime.datetime.now().strftime("%A"))
         sys.exit()
 
 
@@ -156,7 +162,7 @@ def person_menu(ppl):
 
 
         elif option == 2:
-            #reset_day(person)
+            clear_daily_progress(person)
             pass
         elif option == 3:
             display_ppl(ppl)
@@ -321,10 +327,40 @@ def set_data_day(person, data):
     out_file.write("".join(lines))
     out_file.close()
 
+def clear_daily_progress(person):
+    out_file = open('data.txt','r')
+    lines = out_file.readlines()
+    out_file.close()
+
+    for i in range(len(lines)):
+        line = lines[i].split()
+
+        if len(line) > 0 and line[2] == person:
+            i += 7
+            for j in range(6):
+                line = lines[i].split()
+                line[2] = '0' +'\n'
+                lines[i] = " ".join(line)
+                i += 1
+            break
 
 
+    #write to file
+    out_file = open('data.txt', 'w')
+    out_file.write("".join(lines))
+    out_file.close()
 
 
+def get_last_save():
+    out_file = open('data.txt', 'r')
+    lines = out_file.readlines()
+    out_file.close()
+
+    for line in lines:
+
+        if len(line) == 1:
+            return line[0]
+    return 'garbage'
 
 
 if __name__ == "__main__":

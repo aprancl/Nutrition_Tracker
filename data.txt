@@ -54,3 +54,4 @@ fat_day = 0
 sugar_day = 0
 satfat_day = 0
 
+Tuesday
