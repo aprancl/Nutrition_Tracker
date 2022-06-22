@@ -370,12 +370,12 @@ def set_day(day):
     # read data
     out_file = open('data.txt', 'r')
     lines = out_file.readlines()
-    lines[len(lines) - 1] = day
     out_file.close()
+    lines[len(lines) - 1] = day
 
     # write data
     out_file = open('data.txt', 'w')
-    out_file.write(" ".join(lines))
+    out_file.write("".join(lines))
     out_file.close()
 
 
