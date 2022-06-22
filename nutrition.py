@@ -2,6 +2,7 @@ import datetime
 import pdb
 import sys
 import os
+from time import strftime
 
 
 
@@ -97,8 +98,8 @@ def main_menu(ppl):
 
     elif option == 5:
         # automate the clearing of data when new day comes around
-        out_file = open('data.txt', 'a')
-        out_file.write(datetime.datetime.now().strftime("%A"))
+        # make document day method
+        set_day(datetime.datetime.now().strftime("%A"))
         sys.exit()
 
 
@@ -125,41 +126,39 @@ def person_menu(ppl):
     print("|{0:^38s}|".format('(' + person + ')'))
     draw_chart(nut_categories, person_data)
     
-    # daily progress
-    print("-" * 40)
-    print("|{0:^38s}|".format("Daily Progress"))
-    print("|{0:^38s}|".format('(' + date.strftime("%A") + ')')) # the day of the week
-    print("| {0:^37s}|".format(str(date)[0:11]))
-
-    print('-' * 40)
-    for i in range(len(person_data_day)):
-        print("|    {0:<19} : {1:^12s}| ---{2:.2f}%".format(nut_categories[i], person_data_day[i] + '/' + person_data[i], (float(person_data_day[i]) / float(person_data[i]))* 100))
-    print('-' * 40)
+    
     
     # display some more options
 
     while True:    
 
+
+        # daily progress
+        print("-" * 40)
+        print("|{0:^38s}|".format("Daily Progress"))
+        print("|{0:^38s}|".format('(' + date.strftime("%A") + ')')) # the day of the week
+        print("| {0:^37s}|".format(str(date)[0:11]))
+
+        print('-' * 40)
+        for i in range(len(person_data_day)):
+            print("|    {0:<19} : {1:^12s}| ---{2:.2f}%".format(nut_categories[i], person_data_day[i] + '/' + person_data[i], (float(person_data_day[i]) / float(person_data[i]))* 100))
+        print('-' * 40)
+    
+    # display some more options
+
+    
+
         print("More options...\nAdd Meal Entry (1)\nReset day (2)\nBack (3)")
 
         option = int(input("ENTER: "))
-        while int(option) < 1 or int(option) > 3:
-            print("Please enter an option between 1 and 5")
-            option = input("ENTER: ")
 
         if option == 1:
             add_meal(person)
 
-            print("-" * 40)
-            print("|{0:^38s}|".format("Daily Progress"))
-            print("|{0:^38s}|".format('(' + date.strftime("%A") + ')')) # the day of the week
-            print("| {0:^37s}|".format(str(date)[0:11]))
-
-            print('-' * 40)
-            for i in range(len(person_data_day)):
-                print("|    {0:<19} : {1:^12s}| ---{2:.2f}%".format(nut_categories[i], person_data_day[i] + '/' + person_data[i], (float(person_data_day[i]) / float(person_data[i]))* 100))
-            print('-' * 40)
-
+            # for totals
+            person_data = get_data(person)
+            # for daily
+            person_data_day = get_data_day(person)
 
         elif option == 2:
             clear_daily_progress(person)
@@ -167,6 +166,9 @@ def person_menu(ppl):
         elif option == 3:
             display_ppl(ppl)
             return
+        else:
+            print("Please enter an option between 1 and 5")
+            option = input("ENTER: ")
 
 def cur_day_menu(person):
 
@@ -361,6 +363,20 @@ def get_last_save():
         if len(line) == 1:
             return line[0]
     return 'garbage'
+
+
+def set_day(day):
+
+    # read data
+    out_file = open('data.txt', 'r')
+    lines = out_file.readlines()
+    lines[len(lines) - 1] = day
+    out_file.close()
+
+    # write data
+    out_file = open('data.txt', 'w')
+    out_file.write(" ".join(lines))
+    out_file.close()
 
 
 if __name__ == "__main__":
